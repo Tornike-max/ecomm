@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect, useContext } from "react";
 import { userContext } from "../../context/userContext";
 
+
 const generateRegisterFormValues = () => {
   return {
     firstName: {
