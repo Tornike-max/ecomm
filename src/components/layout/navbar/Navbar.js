@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Link } from 'react-router-dom';
 import React, { useContext } from "react";
 import { ProductContext } from "../../../context/ProductContext";
 

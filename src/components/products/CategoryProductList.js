@@ -2,18 +2,17 @@ import { Grid } from '@mui/material'
 import React from 'react'
 import ProductCard from './ProductCard'
 
-const CategoryProductList = () => {
+const CategoryProductList = ({ data }) => {
   return (
-    <Grid container spacing = {2}>
-       {data.products?.length>0 &&
-       data.products.map((product)=>{
+   <Grid container spacing={2}>
+    {data.products?.length > 0 && data.products.map((product)=> {
         return(
-            <Grid item key={product._id} xs={4} style={{marginTop: "50px"}}>
-               <ProductCard product={product} />
+            <Grid item key={product._id} xs={4} style={{marginTop:'50px'}}>
+                <ProductCard  product={product}/>
             </Grid>
         )
-       })}
-    </Grid>
+    })}
+   </Grid>
   )
 }
 
