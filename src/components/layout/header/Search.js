@@ -1,30 +1,26 @@
 import { TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
-import { instance } from '../../../app/instance'
+import { useState } from 'react'
+import instance from '../../../app/instance'
 
 const Search = () => {
-    const [value, setValue] = useState("")
-
-
-    useEffect(()=>{
-       const timeId = setTimeout(()=>{
-          const fillterByName = async()=>{
-            const {data} = await instance.get(`/products/search/?name=${value}`)
-          };
-          if(value) {
-            fillterByName();
-          }
+    const [value,setValue] = useState("")
+    useEffect(() => {
+        const timerId = setTimeout(() => {
+            const filterByName = async() => {
+                const { data } = await instance.get(`/products/search?name=${value}`) 
+            }
+            if(value){
+                filterByName()
+            }
         },500)
-       return()=>{
-        clearTimeout(timeId);
-       }
+        return () => {
+            clearTimeout(timerId)
+        }
     },[value])
-
   return (
-    <div>
-        <TextField value={value} onChange={(e) =>setValue(e.target.value)}/>
-    </div>
+   <TextField value={value} onChange={(e) => setValue(e.target.value)}/>
   )
 }
 

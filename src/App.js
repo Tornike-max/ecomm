@@ -39,7 +39,7 @@ const App = () => {
           <Route path="/cart" element={<CartPage/>}></Route>
           <Route path="/products/categories/:categoryName" element={<></>} ></Route>
           <Route path="/products/categories/:categoryName/:productName" element={<SingleProductPage/>}></Route>
-          <Route path="/products/new" element={  <ProtectedRoute hasAccess={true}> <ProductsFormPage /> </ProtectedRoute>}/>
+          <Route path="/products/new" element={  <ProtectedRoute hasAccess={isAdmin}> <ProductsFormPage /> </ProtectedRoute>}/>
           <Route path="/products/:id/edit" element={<ProtectedRoute hasAccess={true}> <ProductsFormPage /></ProtectedRoute>}/>
         </Routes>
         </Layout>

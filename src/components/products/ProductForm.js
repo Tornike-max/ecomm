@@ -1,128 +1,110 @@
-import React, { useEffect, useState } from 'react'
+import { Button, FormControl, TextField } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
 import useForm from '../../app/hooks/useForm'
-import {Button, FormControl, FormLabel, TextField} from "@mui/material";
-import FileBase from "react-file-base64";
-import { useContext } from 'react'
+import FileBase from 'react-file-base64';
 import { ProductContext } from '../../context/ProductContext'
 
 const generateAddProductFormValues = (selectedProduct) =>{
-   return {
-    name:{
-        value: selectedProduct?.name || "",
-        required:true,
-        error:"",
-        validateInput:(name)=>
-        name.length > 1 ? null : "name should have at least 2 character"
-    },
-
-    description: {
-        value: selectedProduct?.description || "",
-        required:true,
-        error:"",
-        validateInput:(description)=>
-        description.length > 1 ? null : "description should have at least 2 character"
-    },
-
-    category:{
-        value: selectedProduct?.category || "",
-        required:true,
-        error:"",
-        validateInput:(category)=>
-        category.length > 1 ? null : "category should have at least 2 character"
-    },
-
-    brand:{
-        value: selectedProduct?.brand || "",
-        required:true,
-        error:"",
-        validateInput:(brand)=>
-        brand.length > 1 ? null : "brand should have at least 2 character"
-    },
-
-    price:{
-        value: selectedProduct?.price || "",
-        required:true,
-        error:"",
-        validateInput:(price)=>
-        price.length > 1 ? null : "price should be positive number"
+    return {
+        name: {
+            value: selectedProduct?.name || "",
+            required: true,
+            error:"",
+            validateInput: (name) => name.length > 1 ? null :"name should have at least 2 character bro"
+        },
+        description: {
+            value: selectedProduct?.description || "",
+            required: true,
+            error:"",
+            validateInput: (description) => description.length > 2 ? null :" description should have at least 3 character bro"
+        },
+        category: {
+            value: selectedProduct?.category || "",
+            required: true,
+            error:"",
+            validateInput: (category) => category.length > 1 ? null :"category should have at least 2 character bro"
+        },
+        brand: {
+            value: selectedProduct?.brand || "",
+            required: true,
+            error:"",
+            validateInput: (brand) => brand.length > 1 ? null :"name should have at least 2 character bro"
+        },
+        price: {
+            value: selectedProduct?.price || "",
+            required: true,
+            error:"",
+            validateInput: (price) => price.length > 0 ? null :"price should positive number bro"
+        },
     }
-   }
 }
+
 const ProductForm = () => {
-    const{formValues:productFormValues, onInputChange, setFormValues} = useForm({
-        defaultFormValues: generateAddProductFormValues(),
-    });
-    const{saveProduct, selectedProduct} = useContext(ProductContext)
-
-    const[image,setImage] = useState("");
-
+    const { formValues: producFormValues, onInputChange, setFormValues } = useForm({defaultFormValues: generateAddProductFormValues()})
+    const [image,setImage]= useState("")
+    const { saveProduct, selectedProduct } = useContext(ProductContext)
     const saveProductHandler = () => {
-        const name = productFormValues.name.value;
-        const description = productFormValues.description.value;
-        const category = productFormValues.category.value;
-        const brand = productFormValues.brand.value;
-        const price = productFormValues.price.value;
-        saveProduct({name, description: description, category,brand,price,image})
+        const name = producFormValues.name.value
+        const description = producFormValues.description.value
+        const category = producFormValues.category.value
+        const brand = producFormValues.brand.value
+        const price = producFormValues.price.value
+        saveProduct( { name,description,category,brand,price })
     }
-
-    useEffect(()=>{
-       if(selectedProduct) {
-         setFormValues(generateAddProductFormValues(selectedProduct))
-       }
-    },[])
-
+    useEffect(() => {
+        setFormValues(generateAddProductFormValues(selectedProduct))
+    },[selectedProduct])
   return (
-    
     <FormControl>
-
         <TextField
-        name="name"
-        value={productFormValues.name.value}
+        name='name'
+        value={producFormValues.name.value}
         onChange={onInputChange}
-        error={!!productFormValues.name.error}
-        helperText={productFormValues.name.error}
+        error={producFormValues.name.error}
+        helperText={producFormValues.name.error}
         label={"name"}
-        margin="dense"
+        margin={"dense"}
         />
-
         <TextField
-        name="description"
-        value={productFormValues.description.value}
+        name='description'
+        value={producFormValues.description.value}
         onChange={onInputChange}
-        error={!!productFormValues.description.error}
-        helperText={productFormValues.description.error}
+        error={producFormValues.description.error}
+        helperText={producFormValues.description.error}
         label={"description"}
-        margin="dense"
+        margin={"dense"}
         />
-
-<TextField
-        name="category"
-        value={productFormValues.category.value}
+        <TextField
+        name='category'
+        value={producFormValues.category.value}
         onChange={onInputChange}
-        error={!!productFormValues.category.error}
-        helperText={productFormValues.category.error}
+        error={producFormValues.category.error}
+        helperText={producFormValues.category.error}
         label={"category"}
-        margin="dense"
+        margin={'dense'}
         />
-
-<TextField
-        name="price"
-        value={productFormValues.price.value}
+        <TextField
+        name='brand'
+        value={producFormValues.brand.value}
         onChange={onInputChange}
-        error={!!productFormValues.price.error}
-        helperText={productFormValues.price.error}
-        label={"price"}
-        margin="dense"
+        error={producFormValues.brand.error}
+        helperText={producFormValues.brand.error}
+        label={"brand"}
+        margin={'dense'}
         />
+        <TextField
+        name='price'
+        value={producFormValues.price.value}
+        onChange={onInputChange}
+        error={producFormValues.price.error}
+        helperText={producFormValues.price.error}
+        label={"price"}
+        margin={'dense'}
+        />
+        <FileBase type = 'file' multiple={false} onDone={({ base64}) => setImage(base64)}/>
+        {/* <FileBase type='file' multiple={false} onDone={({ base64 }) =>setImage(base64) }/> */}
+        <Button onClick={saveProductHandler}>Save</Button>
 
-        <FileBase
-        type="file"
-        multiple={false}
-        onDone={({base64})=>setImage(base64)}
-        >
-
-        </FileBase>
-    <Button onClick={saveProductHandler}>save</Button>
     </FormControl>
   )
 }
