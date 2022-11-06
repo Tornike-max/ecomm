@@ -6,7 +6,6 @@ import { ProductContext } from '../../../context/ProductContext';
 
 const Navbar = () => {
   const { mainPageProducts } = useContext(ProductContext)
-  //console.log("hey", mainPageProducts)
   return (
     <div>
       {mainPageProducts.categories?.length > 0 &&

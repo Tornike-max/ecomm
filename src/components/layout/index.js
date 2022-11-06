@@ -3,14 +3,15 @@ import Header from "./header/Header";
 import Navbar from "./navbar/Navbar";
 
 const Layout = ({ children }) => {
-  return (
+    return (
     <>
-      <Header />
-      <Divider />
-      <Navbar />
-      {children}
+        <Header />
+        <Divider />
+        <Navbar />   
+        {children}
     </>
-  );
-};
+    )
+    
+}
 
 export default Layout;

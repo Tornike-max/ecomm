@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 import MainPage from '../components/products/MainPage'
 
 const HomePage = () => {
   return (
     <div>
-      <MainPage/>
+      <MainPage />
     </div>
   )
 }

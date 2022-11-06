@@ -102,7 +102,7 @@ const ProductForm = () => {
         margin={'dense'}
         />
         <FileBase type = 'file' multiple={false} onDone={({ base64}) => setImage(base64)}/>
-    
+        
         <Button onClick={saveProductHandler}>Save</Button>
 
     </FormControl>

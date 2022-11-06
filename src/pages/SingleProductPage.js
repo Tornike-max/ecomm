@@ -1,9 +1,11 @@
 import React from 'react'
-import SingleProduct from "../components/products/SingleProduct"
+import SingleProduct from '../components/products/SingleProduct'
 
 const SingleProductPage = () => {
   return (
-    <SingleProduct></SingleProduct>
+    <div>
+        <SingleProduct />
+    </div>
   )
 }
 
